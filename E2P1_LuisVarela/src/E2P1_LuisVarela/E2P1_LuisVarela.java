@@ -5,6 +5,7 @@
 package E2P1_LuisVarela;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +14,8 @@ import java.util.Scanner;
 public class E2P1_LuisVarela extends javax.swing.JFrame {
 
     private Scanner lea = new Scanner(System.in);
+    private Numero m = new Numero();
+    private ArrayList<Numero> Num = new ArrayList<>();
 
     /**
      * Creates new form E2P1_LuisVarela
@@ -20,6 +23,7 @@ public class E2P1_LuisVarela extends javax.swing.JFrame {
     public E2P1_LuisVarela() {
         initComponents();
     }
+
     //String letras="ABCDEF"
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,6 +136,11 @@ public class E2P1_LuisVarela extends javax.swing.JFrame {
             int opcion1 = lea.nextInt();
             switch (opcion1) {
                 case 1: {
+                    int base;
+                    do {
+                        System.out.println("Ingrese un numero base");
+                        base = lea.nextInt();
+                    } while (base >= 36 || base <= 1);
                     boolean no_validado = true;
                     int numero1 = 0;
                     String numero;
@@ -144,19 +153,21 @@ public class E2P1_LuisVarela extends javax.swing.JFrame {
                         }
                         if (numero1 >= 0) {
                             no_validado = false;
+                        } else {
+                            System.out.println("Error ");
                         }
                     } while (no_validado);
-
-                    int base;
-                    do {
-                        System.out.println("Ingrese un numero base");
-                        base = lea.nextInt();
-                    } while (base >= 36 || base <= 1);
-                    
+                    String decimal = m.baseToDec(base, numero1);
+                    System.out.println(decimal);
+                    Numero m = new Numero(base, numero1, decimal);
+                    Num.add(m);
                 }
                 break;
                 case 2: {
-
+                    imprimir();
+                    System.out.println("Ingrese el indice del numero que desea eliminar:");
+                    int posicion = lea.nextInt();
+                    Num.remove(posicion - 1);
                 }
                 break;
                 case 3: {
@@ -183,19 +194,34 @@ public class E2P1_LuisVarela extends javax.swing.JFrame {
             int opcion1 = lea.nextInt();
             switch (opcion1) {
                 case 1: {
-
+                    imprimir();
+                    System.out.println("Ingrese el indice del primer numero");
+                    int primero = lea.nextInt();
+                    System.out.println("Ingrese el indice del segundo numero");
+                    int segundo = lea.nextInt();
+//                    Numero a;
+//                    a = Num.get(num1 - 1);
+//                    int num1 =
                 }
                 break;
                 case 2: {
-
+                    imprimir();
+                    System.out.println("Ingrese el indice del primer numero");
+                    int primero = lea.nextInt();
+                    System.out.println("Ingrese el indice del segundo numero");
+                    int segundo = lea.nextInt();
                 }
                 break;
                 case 3: {
-
+                    imprimir();
+                    System.out.println("Ingrese el indice del primer numero");
+                    int primero = lea.nextInt();
+                    System.out.println("Ingrese el indice del segundo numero");
+                    int segundo = lea.nextInt();
                 }
                 break;
                 case 4: {
-
+                    seguir = false;
                 }
                 break;
                 default:
@@ -254,7 +280,7 @@ public class E2P1_LuisVarela extends javax.swing.JFrame {
         boolean validado = false;
         for (int i = 0; i < numero.length(); i++) {
             for (int j = 0; j < num.length(); j++) {
-                if (numero.charAt(i) != num.charAt(j)) {
+                if (numero.charAt(i) == num.charAt(j)) {
                     cantidad++;
                 }
             }
@@ -263,6 +289,17 @@ public class E2P1_LuisVarela extends javax.swing.JFrame {
             validado = true;
         }
         return validado;
+    }
+
+    public void imprimir() {
+        int num1 = 1;
+        Numero a;
+        while (num1 <= Num.size()) {
+            a = Num.get(num1 - 1);
+            System.out.println("Lista de Numero:");
+            System.out.println(num1 + "." + a.getresultado() + " base " + a.getbase() + ":" + a.getnumero()+"\n");
+            num1++;
+        }
     }
 
 }
